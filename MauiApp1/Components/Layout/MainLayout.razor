@@ -1,0 +1,32 @@
+﻿@using MauiApp1.Model
+@inherits LayoutComponentBase
+@inject NavigationManager Nav
+
+<div class="page">
+    @if (_globalState.CurrentUser != null)
+    {
+        <div class="sidebar">
+            <NavMenu Username="@_globalState.CurrentUser.Username" UserRole="@_globalState.CurrentUser.Role" LogoutHandler="LogoutHandler" />
+        </div>
+    }
+    <main>
+        <article class="content px-4">
+            <CascadingValue Value="@_globalState">
+                @Body
+            </CascadingValue>
+        </article>
+    </main>
+</div>
+
+
+@code {
+	private GlobalState _globalState = new();
+
+	private void LogoutHandler()
+	{
+		if (_globalState.CurrentUser == null)
+		{
+			Nav.NavigateTo("/login");
+		}
+	}
+}

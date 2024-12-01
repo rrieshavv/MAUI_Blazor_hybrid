@@ -1,0 +1,15 @@
+﻿@page "/"
+@using MauiApp1.Model
+@inject NavigationManager Nav
+
+@code {
+    [CascadingParameter]
+    private GlobalState _globalState { get; set; }
+
+    protected override void OnInitialized()
+    {
+
+        Nav.NavigateTo("/login");
+
+    }
+}
